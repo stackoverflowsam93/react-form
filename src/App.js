@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+const submitData = async () => {
+  const nodeUrl = "http://localhost:6060?";
+  fetch(nodeUrl, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    // body: JSON.stringify({'test': 'test'})
+    body: JSON.stringify({ from: "example@email.com", to: "example@email.com" })
+  })
+    .then((res) => {
+      alert("then");
+      alert(JSON.stringify(res));
+    })
+    .catch((err) => {
+      alert("err");
+      alert(JSON.stringify(err));
+    });
+};
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button type="submit" onClick={() => submitData()}>
+        submit
+      </button>
     </div>
   );
 }
-
-export default App;
